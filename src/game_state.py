@@ -13,6 +13,7 @@ class GameState:
 
         self.board = board
         self.side_to_move = side_to_move
+        self.castling_rights = castling_rights
         self.en_passant_square = en_passant_square
         self.halfmove_clock = halfmove_clock
         self.full_move_number = full_move_number
@@ -21,7 +22,8 @@ class GameState:
     def __repr__(self):
         representation = f"{repr(self.board)}"
         representation += f"side to move: {self.side_to_move}\n"
-        representation += f"en_passant_square: {self.en_passant_square}\n"
+        representation += f"castling right: {self.castling_rights}\n"
+        representation += f"en_passant square: {self.en_passant_square}\n"
         representation += f"halfmove clock: {self.halfmove_clock}\n"
-        representation += f"full_move_number: {self.full_move_number}"
+        representation += f"full move number: {self.full_move_number}"
         return representation
