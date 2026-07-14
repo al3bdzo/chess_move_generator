@@ -4,8 +4,8 @@ from src.move import Move
 
 import pytest
 
-def sort_moves(moves):
-    return moves.sort(key=lambda x: (x.from_sq, x.to_sq, x.promotion))
+def sort_moves(moves): 
+    return sorted(moves, key=lambda x: (x.from_sq, x.to_sq, x.promotion or ""))
 
 @pytest.mark.parametrize("game_state, square, moves", [
     (
@@ -22,7 +22,7 @@ def sort_moves(moves):
         [],
     ),
     (
-        GameState("8/8/8/8/3p4/8/4P3/8 w - - 0 1"),
+        GameState("8/8/8/8/8/3p4/4P3/8 w - - 0 1"),
         "e2",
         [
             Move("e2", "e3"),
@@ -31,7 +31,7 @@ def sort_moves(moves):
         ],
     ),
     (
-        GameState("8/8/8/8/5p2/8/4P3/8 w - - 0 1"),
+        GameState("8/8/8/8/8/5p2/4P3/8 w - - 0 1"),
         "e2",
         [
             Move("e2", "e3"),
@@ -40,7 +40,7 @@ def sort_moves(moves):
         ],
     ),
     (
-        GameState("8/8/8/8/3p1p2/8/4P3/8 w - - 0 1"),
+        GameState("8/8/8/8/8/3p1p2/4P3/8 w - - 0 1"),
         "e2",
         [
             Move("e2", "e3"),
@@ -57,7 +57,7 @@ def sort_moves(moves):
         ],
     ),
     (
-        GameState("8/8/8/8/1p6/8/P7/8 w - - 0 1"),
+        GameState("8/8/8/8/8/1p6/P7/8 w - - 0 1"),
         "a2",
         [
             Move("a2", "a3"),
@@ -66,7 +66,7 @@ def sort_moves(moves):
         ],
     ),
     (
-        GameState("8/8/8/8/6p1/8/7P/8 w - - 0 1"),
+        GameState("8/8/8/8/8/6p1/7P/8 w - - 0 1"),
         "h2",
         [
             Move("h2", "h3"),
