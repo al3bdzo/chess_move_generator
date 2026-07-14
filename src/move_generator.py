@@ -52,7 +52,7 @@ def generate_pawn_moves(game_state):
                             moves.append(Move(index_to_square(i, j), index_to_square(i - 1, j - 1), is_capture = True, is_en_passant = True))
 
                     if j <= 6:
-                        if board[i - 1][j + 1] != '.' or game_state.en_passant_square == index_to_square(i - 1, j + 1):
+                        if board[i - 1][j + 1] != '.':
                             if i > 1:
                                 moves.append(Move(index_to_square(i, j), index_to_square(i - 1, j + 1), is_capture = True))
                             if i == 1:
