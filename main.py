@@ -3,11 +3,9 @@ from src.game_state import GameState
 from src.move_generator import generate_pawn_moves
 
 def main():
-    state = GameState()
-    moves = generate_pawn_moves(state)
+    state = GameState("8/8/8/8/3p1p2/8/4P3/8 w - - 0 1")
     print(f"{state}\n")
-    for move in moves:
-        print(f"from: {move.from_sq}; to: {move.to_sq}")
+    
 
 
 if __name__ == "__main__":
