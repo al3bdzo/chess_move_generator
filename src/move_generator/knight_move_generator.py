@@ -1,4 +1,5 @@
 from ..move import Move
+from .helpers import index_to_square, square_to_index
 
 
 

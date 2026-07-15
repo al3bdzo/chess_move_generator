@@ -1,9 +1,7 @@
 from ..move import Move
-
+from .helpers import index_to_square, square_to_index
 
 def generate_white_pawn_moves(game_state, square):
-    from .move_generator import index_to_square, square_to_index
-
     board = game_state.board.board
     en_passant_square = game_state.en_passant_square
     moves = []
@@ -49,8 +47,6 @@ def generate_white_pawn_moves(game_state, square):
 
 
 def generate_black_pawn_moves(game_state, square):
-    from .move_generator import index_to_square, square_to_index
-
     board = game_state.board.board
     en_passant_square = game_state.en_passant_square
     moves = []
