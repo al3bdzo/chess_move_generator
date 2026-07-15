@@ -5,10 +5,10 @@ class GameState:
         self.fen = fen
         self.board = Board()
         self.side_to_move = 'w'
-        self.castling_rights = '-'
+        self.castling_rights = 'KQkq'
         self.en_passant_square = '-'
         self.halfmove_clock = 0
-        self.full_move_number = 0
+        self.full_move_number = 1
 
         if self.fen:
             self.build_from_fen()

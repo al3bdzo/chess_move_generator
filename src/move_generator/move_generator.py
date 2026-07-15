@@ -15,7 +15,7 @@ def square_to_index(square):
 
 
 def generate_pseudo_legal_move(game_state):
-    from .pawn_move_generator import generate_white_pawn_moves
+    from .pawn_move_generator import generate_white_pawn_moves, generate_black_pawn_moves
 
     board = game_state.board.board
     side_to_move = game_state.side_to_move
@@ -24,15 +24,19 @@ def generate_pseudo_legal_move(game_state):
 
     for i in range(len(board)):
         for j in range(len(board[i])):
+            piece = board[i][j]
+            square = index_to_square(i, j)
             if side_to_move == 'w':
-                piece = board[i][j]
-                square = index_to_square(i, j)
                 match piece:
                     case '.':
                         continue
                     case 'P':
                         moves.extend(generate_white_pawn_moves(game_state, square))
             elif side_to_move == 'b':
-                pass
+                match piece:
+                    case '.':
+                        continue
+                    case 'p':
+                        moves.extend(generate_black_pawn_moves(game_state, square))
 
     return moves
