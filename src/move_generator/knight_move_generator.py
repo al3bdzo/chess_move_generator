@@ -1,5 +1,6 @@
 from ..move import Move
-from .helpers import index_to_square, square_to_index
+from ..constants import KNIGHT_OFFSET
+from .helpers import index_to_square, square_to_index, is_on_the_board, get_piece
 
 def generate_knight_moves(game_state, square):
     board = game_state.board.board 
@@ -7,18 +8,21 @@ def generate_knight_moves(game_state, square):
 
     i, j = square_to_index(square)
 
-    moves = [(i + 2, j + 1), (i + 2, j - 1), (i - 2, j + 1), (i - 2, j - 1), (i + 1, j - 2), (i - 1, j - 2), (i + 1, j + 2), (i - 1, j + 2)]
+    moves = []
+    for x in KNIGHT_OFFSET:
+        moves.append((i + x[0], j + x[1]))
+
     pseudo_legal_moves = []
 
     for move in moves:
-        if move[0] >= 0 and move[0] <= 7 and move[1] >= 0 and move[1] <= 7:
+        if is_on_the_board(*move):
             to_sq = index_to_square(*move)
-            if board[move[0]][move[1]] == '.':
+            to_piece = get_piece(board, to_sq)
+            if to_piece == '.':
                 pseudo_legal_moves.append(Move(square, to_sq))
-            if side_to_move == 'w' and board[move[0]][move[1]].islower():
+            if side_to_move == 'w' and to_piece.islower():
                 pseudo_legal_moves.append(Move(square, to_sq, is_capture = True))
-            if side_to_move == 'b' and board[move[0]][move[1]].isuuper():
+            if side_to_move == 'b' and to_piece.isuuper():
                 pseudo_legal_moves.append(Move(square, to_sq, is_capture = True))
-            
 
     return pseudo_legal_moves

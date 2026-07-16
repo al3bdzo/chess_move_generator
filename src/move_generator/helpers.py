@@ -10,3 +10,12 @@ def square_to_index(square):
     rank_indexes = [7, 6, 5, 4, 3, 2, 1, 0]
     rank_index = rank_indexes[int(square[1]) - 1]
     return rank_index, file_index
+
+def is_on_the_board(i, j):
+    if i >= 0 and i <= 7 and j >= 0 and j <= 7:
+        return True
+    return False
+
+def get_piece(board, square):
+    i, j = square_to_index(square)
+    return board[i][j]
