@@ -1,16 +1,24 @@
 from ..move import Move
-from ..constants import BISHOP_DIRECTIONS
+from ..constants import QUEEN_DIRECTIONS, ROOK_DIRECTIONS, BISHOP_DIRECTIONS
 from .helpers import square_to_index, is_on_the_board, index_to_square, get_piece
 
-def generate_bishop_moves(game_state, square):
+def generate_qrb_moves(game_state, square):
     board = game_state.board.board
     side_to_move = game_state.side_to_move
-
     moves = []
-
     i, j = square_to_index(square)
+    piece = get_piece(board, square)
+    directions = []
 
-    for direction in BISHOP_DIRECTIONS:
+    match piece.lower():
+        case 'q':
+            directions = QUEEN_DIRECTIONS
+        case 'r':
+            directions = ROOK_DIRECTIONS
+        case 'b':
+            directions = BISHOP_DIRECTIONS
+
+    for direction in directions:
         rank = i
         file = j 
         for _ in range(len(board)):

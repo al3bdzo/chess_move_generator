@@ -20,9 +20,9 @@ def generate_knight_moves(game_state, square):
             to_piece = get_piece(board, to_sq)
             if to_piece == '.':
                 pseudo_legal_moves.append(Move(square, to_sq))
-            if side_to_move == 'w' and to_piece.islower():
+            elif side_to_move == 'w' and to_piece.islower():
                 pseudo_legal_moves.append(Move(square, to_sq, is_capture = True))
-            if side_to_move == 'b' and to_piece.isuuper():
+            elif side_to_move == 'b' and to_piece.isupper():
                 pseudo_legal_moves.append(Move(square, to_sq, is_capture = True))
 
     return pseudo_legal_moves

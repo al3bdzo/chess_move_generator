@@ -4,7 +4,7 @@ from src.move_generator.move_generator import generate_pseudo_legal_move
 
 
 def main():
-    state = GameState("1p6/8/8/3B4/4p3/8/6p1/8 w - - 0 1")
+    state = GameState("8/3P4/8/2PQP3/4P3/8/8/8 w - - 0 1")
     moves = sorted(generate_pseudo_legal_move(state), key=lambda x: (x.from_sq, x.to_sq, x.promotion or ""))
     print(f"{state}\n")
     print(f"number of moves: {len(moves)}")
