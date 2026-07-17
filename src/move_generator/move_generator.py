@@ -1,5 +1,6 @@
 from ..move import Move
-from .pawn_move_generator import generate_white_pawn_moves, generate_black_pawn_moves
+from .pawn_move_generator import generate_pawn_moves
+from .bishop_move_generator import generate_bishop_moves
 from .knight_move_generator import generate_knight_moves
 from .helpers import index_to_square, square_to_index
 
@@ -19,17 +20,21 @@ def generate_pseudo_legal_move(game_state):
                     case '.':
                         continue
                     case 'P':
-                        moves.extend(generate_white_pawn_moves(game_state, square))
+                        moves.extend(generate_pawn_moves(game_state, square))
                     case 'N':
                         moves.extend(generate_knight_moves(game_state, square))
+                    case 'B':
+                        moves.extend(generate_bishop_moves(game_state, square))
             elif side_to_move == 'b':
                 match piece:
                     case '.':
                         continue
                     case 'p':
-                        moves.extend(generate_black_pawn_moves(game_state, square))
+                        moves.extend(generate_pawn_moves(game_state, square))
                     case 'n':
                         moves.extend(generate_knight_moves(game_state, square))
+                    case 'b':
+                        moves.extend(generate_bishop_moves(game_state, square))
 
 
     return moves

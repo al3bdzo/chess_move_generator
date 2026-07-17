@@ -1,6 +1,7 @@
 from src.game_state import GameState
 from src.move_generator.move_generator import generate_pseudo_legal_move
 from src.move import Move
+from src.move_generator.bishop_move_generator import generate_bishop_moves
 
 import pytest
 
@@ -131,4 +132,140 @@ import pytest
 def test_generate_pseudo_legal_moves(game_state, moves):
     generated = generate_pseudo_legal_move(game_state)
 
+    assert sorted(generated, key=str) == sorted(moves, key=str)
+
+@pytest.mark.parametrize("game_state, square, moves", [
+    (
+        # Empty board, bishop in center
+        GameState("8/8/8/3B4/8/8/8/8 w - - 0 1"),
+        "d5",
+        [
+            Move("d5", "c6"),
+            Move("d5", "b7"),
+            Move("d5", "a8"),
+
+            Move("d5", "e6"),
+            Move("d5", "f7"),
+            Move("d5", "g8"),
+
+            Move("d5", "c4"),
+            Move("d5", "b3"),
+            Move("d5", "a2"),
+
+            Move("d5", "e4"),
+            Move("d5", "f3"),
+            Move("d5", "g2"),
+            Move("d5", "h1"),
+        ]
+    ),
+
+    (
+        # Corner bishop
+        GameState("8/8/8/8/8/8/8/B7 w - - 0 1"),
+        "a1",
+        [
+            Move("a1", "b2"),
+            Move("a1", "c3"),
+            Move("a1", "d4"),
+            Move("a1", "e5"),
+            Move("a1", "f6"),
+            Move("a1", "g7"),
+            Move("a1", "h8"),
+        ]
+    ),
+
+    (
+        # Friendly piece blocks
+        GameState("8/8/8/3B4/4P3/8/8/8 w - - 0 1"),
+        "d5",
+        [
+            Move("d5", "c6"),
+            Move("d5", "b7"),
+            Move("d5", "a8"),
+
+            Move("d5", "e6"),
+            Move("d5", "f7"),
+            Move("d5", "g8"),
+
+            Move("d5", "c4"),
+            Move("d5", "b3"),
+            Move("d5", "a2"),
+        ]
+    ),
+
+    (
+        # Enemy piece capture stops ray
+        GameState("8/8/8/3B4/4p3/8/8/8 w - - 0 1"),
+        "d5",
+        [
+            Move("d5", "c6"),
+            Move("d5", "b7"),
+            Move("d5", "a8"),
+
+            Move("d5", "e6"),
+            Move("d5", "f7"),
+            Move("d5", "g8"),
+
+            Move("d5", "c4"),
+            Move("d5", "b3"),
+            Move("d5", "a2"),
+
+            Move("d5", "e4", is_capture=True),
+        ]
+    ),
+
+    (
+        # Captures on multiple diagonals
+        GameState("8/1p6/8/3B4/4p3/8/6p1/8 w - - 0 1"),
+        "d5",
+        [
+            Move("d5", "c6"),
+            Move("d5", "b7", is_capture=True),
+
+            Move("d5", "e6"),
+            Move("d5", "f7"),
+            Move("d5", "g8"),
+
+            Move("d5", "c4"),
+            Move("d5", "b3"),
+            Move("d5", "a2"),
+
+            Move("d5", "e4", is_capture=True),
+        ]
+    ),
+
+    (
+        # Bishop trapped by friendly pieces
+        GameState("8/8/2P1P3/3B4/2P1P3/8/8/8 w - - 0 1"),
+        "d5",
+        [],
+    ),
+
+    (
+        # Black bishop
+        GameState("8/8/8/3b4/8/8/8/8 b - - 0 1"),
+        "d5",
+        [
+            Move("d5", "c6"),
+            Move("d5", "b7"),
+            Move("d5", "a8"),
+
+            Move("d5", "e6"),
+            Move("d5", "f7"),
+            Move("d5", "g8"),
+
+            Move("d5", "c4"),
+            Move("d5", "b3"),
+            Move("d5", "a2"),
+
+            Move("d5", "e4"),
+            Move("d5", "f3"),
+            Move("d5", "g2"),
+            Move("d5", "h1"),
+        ]
+    ),
+])
+
+def test_generate_bishop_moves(game_state, square, moves):
+    generated = generate_bishop_moves(game_state, square)
     assert sorted(generated, key=str) == sorted(moves, key=str)
