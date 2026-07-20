@@ -19,3 +19,11 @@ def is_on_the_board(i, j):
 def get_piece(board, square):
     i, j = square_to_index(square)
     return board[i][j]
+
+
+def can_capture(moving_piece, captured_piece):
+    if moving_piece.isupper() and captured_piece.islower():
+        return True
+    if moving_piece.islower() and captured_piece.iupper():
+        return True
+    return False
