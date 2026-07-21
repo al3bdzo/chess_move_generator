@@ -17,7 +17,7 @@ def generate_qrb_moves(game_state, square):
         case 'b':
             directions = BISHOP_DIRECTIONS
         case _:
-            raise ValueError(f"Invalid piece passed!: {piece}")
+            raise ValueError(f"Invalid piece passed!: {piece}; expected: (q, r, b)")
 
     for direction in directions:
         rank = i
@@ -31,8 +31,10 @@ def generate_qrb_moves(game_state, square):
                 if to_piece == '.':
                     moves.append(Move(square, to_sq))
                     continue
-                if can_capture(piece, to_piece):
+                elif can_capture(piece, to_piece):
                     moves.append(Move(square, to_sq, is_capture = True))
+                    break
+                else:
                     break
             else:
                 break
@@ -52,7 +54,7 @@ def generate_nk_moves(game_state, square):
         case 'n':
             offset = KNIGHT_OFFSET
         case _:
-            raise ValueError(f"Invalid piece passed!: {piece}")
+            raise ValueError(f"Invalid piece passed!: {piece}; expected: (n, k)")
 
     moves = []
     for di, dj in offset:

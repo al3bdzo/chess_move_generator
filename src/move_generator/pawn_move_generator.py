@@ -23,7 +23,7 @@ def generate_pawn_moves(game_state, square):
             home_rank_index = 6
             promotion_rank_index = 1
         case _:
-            raise ValueError(f"Unexpected piece passed: {piece}")
+            raise ValueError(f"Unexpected piece passed: {piece}; expected: (p)")
 
     for di, dj in offset:
         rank = i + di
