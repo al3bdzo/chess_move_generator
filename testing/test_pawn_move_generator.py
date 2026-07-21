@@ -1,5 +1,5 @@
 from src.game_state import GameState
-from src.move_generator.pawn_move_generator import generate_white_pawn_moves, generate_black_pawn_moves
+from src.move_generator.pawn_move_generator import generate_pawn_moves
 from src.move import Move
 
 import pytest
@@ -150,11 +150,6 @@ def sort_moves(moves):
         ],
     ),
     (
-        GameState("8/8/8/8/8/8/8/4P3 w - - 0 1"),
-        "e1",
-        [],
-    ),
-    (
         GameState("4P3/8/8/8/8/8/8/8 w - - 0 1"),
         "e8",
         [],
@@ -162,7 +157,7 @@ def sort_moves(moves):
 ])
 
 def test_white_pawn_move_generate(game_state, square, moves):
-    assert sort_moves(generate_white_pawn_moves(game_state, square)) == sort_moves(moves)
+    assert sort_moves(generate_pawn_moves(game_state, square)) == sort_moves(moves)
 
 
 @pytest.mark.parametrize("game_state, square, moves", [
@@ -312,11 +307,6 @@ def test_white_pawn_move_generate(game_state, square, moves):
         ],
     ),
     (
-        GameState("4p3/8/8/8/8/8/8/8 b - - 0 1"),
-        "e8",
-        [],
-    ),
-    (
         GameState("8/8/8/8/8/8/8/4p3 b - - 0 1"),
         "e1",
         [],
@@ -324,4 +314,4 @@ def test_white_pawn_move_generate(game_state, square, moves):
 ])
 
 def test_black_pawn_move_generate(game_state, square, moves):
-    assert sort_moves(generate_black_pawn_moves(game_state, square)) == sort_moves(moves)
+    assert sort_moves(generate_pawn_moves(game_state, square)) == sort_moves(moves)

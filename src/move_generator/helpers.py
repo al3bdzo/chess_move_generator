@@ -24,6 +24,24 @@ def get_piece(board, square):
 def can_capture(moving_piece, captured_piece):
     if moving_piece.isupper() and captured_piece.islower():
         return True
-    if moving_piece.islower() and captured_piece.iupper():
+    if moving_piece.islower() and captured_piece.isupper():
         return True
     return False
+
+def is_rank(i, rank_index):
+    if i == rank_index:
+        return True
+    return False
+
+def is_double_pawn_push(board, i, j, di, dj):
+    if abs(i - di) != 2:
+        return False
+    if j != dj:
+        return False
+    if get_piece(board, index_to_square(di, dj)) != '.':
+        return False
+    middle_rank = (i + di) // 2
+
+    if get_piece(board, index_to_square(middle_rank, dj)) != '.':
+        return False
+    return True
