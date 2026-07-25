@@ -33,7 +33,6 @@ def is_attacked_by_rbq(board, square, directions, attackers):
     return False
 
 def is_square_attacked(game_state, square, attacker_side):
-
     if attacker_side not in {"w", "b"}:
         raise ValueError(f"{attacker_side} is not a side to play in chess")
 
@@ -66,3 +65,33 @@ def is_square_attacked(game_state, square, attacker_side):
     rook_attack = is_attacked_by_rbq(board, square, ROOK_DIRECTIONS, {rook, queen})
 
     return pawn_attack or knight_attack or king_attack or bishop_attack or rook_attack 
+
+def find_king(game_state, side):
+    if side not in {"w", "b"}:
+        raise ValueError(f"{side} is not a side to play in chess")
+
+    board = game_state.board.board
+
+    if side == 'w':
+        king = 'K'
+    else:
+        king = 'k'
+    
+    for i in range(8):
+        for j in range(8):
+            if board[i][j] == king:
+                return index_to_square(i, j)
+    
+    raise RuntimeError("king is not on the board!!")
+
+def is_king_in_check(game_state, side):
+    if side not in {"w", "b"}:
+        raise ValueError(f"{side} is not a side to play in chess")
+    
+    king_square = find_king(game_state, side)
+    attacker_side = 'w'
+
+    if side == 'w':
+        attacker_side = 'b'
+    
+    return is_square_attacked(game_state, king_square, attacker_side)
