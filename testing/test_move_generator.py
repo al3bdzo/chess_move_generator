@@ -1,7 +1,7 @@
 import pytest
 
 from src.game_state import GameState
-from src.move_generator.move_generator import generate_pseudo_legal_move as generate_psuedo_legal_moves
+from src.move_generator.move_generator import generate_pseudo_legal_moves 
 from src.move_generator.qrbnk_move_generator import generate_qrb_moves, generate_nk_moves
 
 
