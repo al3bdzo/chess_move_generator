@@ -32,7 +32,7 @@ def generate_qrb_moves(game_state, square):
                     moves.append(Move(square, to_sq))
                     continue
                 elif can_capture(piece, to_piece):
-                    moves.append(Move(square, to_sq, is_capture = True))
+                    moves.append(Move(square, to_sq, is_capture = True, captured_piece = to_piece))
                     break
                 else:
                     break
@@ -69,6 +69,6 @@ def generate_nk_moves(game_state, square):
             if to_piece == '.':
                 pseudo_legal_moves.append(Move(square, to_sq))
             elif can_capture(piece, to_piece):
-                pseudo_legal_moves.append(Move(square, to_sq, is_capture = True))
+                pseudo_legal_moves.append(Move(square, to_sq, is_capture = True, captured_piece = to_piece))
 
     return pseudo_legal_moves
