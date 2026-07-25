@@ -16,9 +16,19 @@ BLACK_PAWN_OFFSET = [
     (1, -1)
 ]
 
+BLACK_PAWN_ATTACKS = [
+    (1, 1), 
+    (1, -1)
+]
+
 WHITE_PAWN_OFFSET = [
     (-1, 0),
     (-2, 0),
+    (-1, -1),
+    (-1, 1)
+]
+
+WHITE_PAWN_ATTACKS = [
     (-1, -1),
     (-1, 1)
 ]
