@@ -8,7 +8,7 @@ def make_move(state, move):
     new_board = new_state.board.board
 
     side_to_move = state.side_to_move
-    en_passant_square_rank = 1
+    forward = 1
 
     from_rank, from_file = square_to_index(move.from_sq)
     to_rank, to_file = square_to_index(move.to_sq)
@@ -22,17 +22,19 @@ def make_move(state, move):
 
     if side_to_move == 'w':
         new_state.side_to_move = 'b'
-        en_passant_square_rank = -1 
+        forward = -1 
     else:
         new_state.side_to_move = 'w'
     
     if move.is_en_passant:
-        new_board[to_rank - en_passant_square_rank][to_file] = '.'
+        new_board[to_rank - forward][to_file] = '.'
 
     if move.is_double_pawn_push:
-        new_state.en_passant_square = index_to_square(from_rank + en_passant_square_rank, from_file)
+        new_state.en_passant_square = index_to_square(from_rank + forward, from_file)
     else: 
         new_state.en_passant_square = '-'
+
+    # don't forget: castling rights, half move and full move counters, 
 
     return new_state
 
