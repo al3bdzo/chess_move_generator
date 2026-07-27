@@ -28,6 +28,37 @@ class GameState:
         self.halfmove_clock = fen_parts[4]
         self.full_move_number = fen_parts[5]
     
+    def get_castling_rights():
+        w_ks = True
+        w_qs = True
+        b_ks = True
+        b_qs = True
+
+        if 'K' not in self.castling_rights:
+            w_ks = False
+        if 'Q' not in self.castling_rights:
+            w_qs = False
+        if 'k' not in self.castling_rights:
+            b_ks = False
+        if 'q' not in self.castling_rights:
+            b_qs = False
+        
+        return w_ks, w_qs, b_ks, b_qs
+    
+    def set_castling_right(w_ks, w_qs, b_ks, b_qs):
+        self.castling_rights = ''
+        if w_ks:
+            self.castling_rights += 'K'
+        if w_qs:
+            self.castling_rights += 'Q'
+        if b_ks:
+            self.castling_rights += 'k'
+        if b_qs:
+            self.castling_rights += 'q'
+    
+        if self.castling_rights == '':
+            self.castling_right = '-'
+    
     def __repr__(self):
         representation = f"{repr(self.board)}"
         representation += f"side to move: {self.side_to_move}\n"

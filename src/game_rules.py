@@ -95,3 +95,10 @@ def is_king_in_check(game_state, side):
         attacker_side = 'b'
     
     return is_square_attacked(game_state, king_square, attacker_side)
+
+def is_checkmate():
+    pass
+
+
+def is_stalemate():
+    pass

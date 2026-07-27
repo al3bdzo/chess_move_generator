@@ -36,6 +36,7 @@ def make_move(state, move):
 
     # don't forget: castling rights, half move and full move counters, 
 
+
     return new_state
 
 
