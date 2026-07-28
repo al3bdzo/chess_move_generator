@@ -96,9 +96,18 @@ def is_king_in_check(game_state, side):
     
     return is_square_attacked(game_state, king_square, attacker_side)
 
-def is_checkmate():
-    pass
+def is_checkmate(game_state):
+    from .move_validator import generate_legal_moves
+    return (
+        is_king_in_check(game_state, game_state.side_to_move)
+        and
+        len(generate_legal_moves(game_state)) == 0
+    )
 
-
-def is_stalemate():
-    pass
+def is_stalemate(game_state):
+    from .move_validator import generate_legal_moves
+    return (
+        not is_king_in_check(game_state, game_state.side_to_move)
+        and
+        len(generate_legal_moves(game_state)) == 0
+    )

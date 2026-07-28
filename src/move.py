@@ -10,3 +10,11 @@ class Move:
     is_castling: bool = False
     is_en_passant: bool = False
     is_double_pawn_push: bool = False
+
+@dataclass
+class UndoInfo:
+    captured_piece: str
+    castling_rights: str
+    en_passant_square: str
+    halfmove_clock: int
+    full_move_number: int
