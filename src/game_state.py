@@ -25,8 +25,8 @@ class GameState:
         self.side_to_move = fen_parts[1]
         self.castling_rights = fen_parts[2]
         self.en_passant_square = fen_parts[3]
-        self.halfmove_clock = fen_parts[4]
-        self.full_move_number = fen_parts[5]
+        self.halfmove_clock = int(fen_parts[4])
+        self.full_move_number = int(fen_parts[5])
     
     def get_castling_rights(self):
         w_ks = True
@@ -57,7 +57,7 @@ class GameState:
             self.castling_rights += 'q'
     
         if self.castling_rights == '':
-            self.castling_right = '-'
+            self.castling_rights = '-'
     
     def __repr__(self):
         representation = f"{repr(self.board)}"

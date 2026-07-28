@@ -45,3 +45,16 @@ def is_double_pawn_push(board, i, j, di, dj):
     if get_piece(board, index_to_square(middle_rank, dj)) != '.':
         return False
     return True
+
+def check_empty_squares(board, squares):
+    for square in squares:
+        if get_piece(board, square) != '.':
+            return False
+    return True
+
+def check_attacked_squares(game_state, squares, attacker):
+    from ..game_rules import is_square_attacked
+    for square in squares:
+        if is_square_attacked(game_state, square, attacker):
+            return False
+    return True

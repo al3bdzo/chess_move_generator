@@ -47,9 +47,9 @@ def generate_pawn_moves(game_state, square):
             if can_capture(piece, to_piece) and dj != 0:
                 if is_rank(i, promotion_rank_index):
                     for promotion in promotions:
-                        psuedo_legal_moves.append(Move(square, to_sq, promotion, is_capture = True, captured_piece = to_piece))
+                        psuedo_legal_moves.append(Move(square, to_sq, promotion, is_capture = True))
                 else:
-                    psuedo_legal_moves.append(Move(square, to_sq, is_capture = True, captured_piece = to_piece))
+                    psuedo_legal_moves.append(Move(square, to_sq, is_capture = True))
                 continue
 
             if to_sq == en_passant_square and dj != 0:
