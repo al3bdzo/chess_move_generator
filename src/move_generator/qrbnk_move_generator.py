@@ -42,6 +42,10 @@ def generate_qrb_moves(game_state, square):
     return moves
     
 
+def handle_castling(game_state):
+    pass
+
+
 def generate_nk_moves(game_state, square):
     board = game_state.board.board 
     i, j = square_to_index(square)

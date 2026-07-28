@@ -28,7 +28,7 @@ class GameState:
         self.halfmove_clock = fen_parts[4]
         self.full_move_number = fen_parts[5]
     
-    def get_castling_rights():
+    def get_castling_rights(self):
         w_ks = True
         w_qs = True
         b_ks = True
@@ -45,7 +45,7 @@ class GameState:
         
         return w_ks, w_qs, b_ks, b_qs
     
-    def set_castling_right(w_ks, w_qs, b_ks, b_qs):
+    def set_castling_right(self, w_ks, w_qs, b_ks, b_qs):
         self.castling_rights = ''
         if w_ks:
             self.castling_rights += 'K'

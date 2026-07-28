@@ -5,10 +5,13 @@ from src.move_applier import make_move
 from src.game_rules import is_square_attacked, find_king, is_king_in_check
 from src.move_validator import generate_legal_moves
 from src.perft import perft
+from src.move import Move
 
 def main():
-    state = GameState("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w - - 0 1")
-    print(state)
+    state = GameState("r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1")
+    move = Move("a1", "a8", is_capture = True)
+    new_state = make_move(state, move)
+    print(new_state)
     
 
 if __name__ == "__main__":
